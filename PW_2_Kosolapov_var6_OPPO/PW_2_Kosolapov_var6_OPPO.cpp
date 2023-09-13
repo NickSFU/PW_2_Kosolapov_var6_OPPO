@@ -9,54 +9,75 @@
 
 using namespace std;
 
-struct temp_measurement
+struct Date
 {
-	int year, month, day;
-	string location;
-	float temperature;
-
+    int year;
+    int month;
+    int day;
+};
+class Temp_Measurement
+{
+private:
+    Date Date;
+    string location;
+    float temperature;
+public:
+    void print_tm(ostream& ost) // Выводит в поток ost одно измерение.
+    {
+        ost << Date.year << "." << Date.month << "." << Date.day << " " << location << " ";
+        if (temperature > 0)
+            ost << "+" << temperature << endl;
+        else
+            ost << temperature << endl;
+    }
+    void read_tm(istream& ist) // Считывает из потока ist одно измерение.
+    {
+        string line;
+        getline(ist, line, '.');
+        Date.year = stoi(line);
+        getline(ist, line, '.');
+        Date.month = stoi(line);
+        getline(ist, line, ' ');
+        Date.day = stoi(line);
+        getline(ist, line, ' ');
+        location = line;
+        getline(ist, line);
+        temperature = stof(line);
+    }
 };
 
-vector <temp_measurement> data1;
 
-void print_temp()
+vector <Temp_Measurement> Temp_Measurement_Box; // Вектор измерений
+
+void print_measurements(vector <Temp_Measurement>& data1, ostream& ost)
 {
-	temp_measurement a;
-	for (int i = 0; i < data1.size(); i++)
-	{
-		a = data1[i];
-		cout << a.year << "." << a.month << "." << a.day << " " << a.location << " " << a.temperature << endl;
-	}
+    for (int i = 0; i < data1.size(); i++)
+    {
+        data1[i].print_tm(ost);
+    }
+}
+
+void save_measurements(vector <Temp_Measurement>& data1, istream& ist)
+{
+    while (!ist.eof())
+    {
+        Temp_Measurement buff;
+        buff.read_tm(ist);
+        data1.push_back(buff);
+    }
 }
 int main()
 {
-	ifstream in("in.txt");
-	if (!in.is_open())
-	{
-		cout << "File is not opened";
-		return 1;
-	}
-	temp_measurement a;
-	string line;
-	int n;
-	getline(in, line, '\n');
-	n = stoi(line);
-	for (int i = 0; i < n; i++)
-	{
-		getline(in, line, '.');
-		a.year = stoi(line);
-		getline(in, line, '.');
-		a.month = stoi(line);
-		getline(in, line, ' ');
-		a.day = stoi(line);
-		getline(in, line, ' ');
-		a.location = line;
-		getline(in, line);
-		a.temperature = stof(line);
-		data1.push_back(a);
-	}
-	print_temp();
-	return 0;
+    vector <Temp_Measurement> Temp_Measurement_Box;
+    ifstream in("in.txt");
+    if (!in.is_open())
+    {
+        cout << "File is not opened";
+        return 1;
+    }
+    save_measurements(Temp_Measurement_Box, in);
+    print_measurements(Temp_Measurement_Box, cout);
+    return 0;
 }
 
 
