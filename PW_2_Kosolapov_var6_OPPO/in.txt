@@ -1,3 +1,5 @@
 2007.07.07 Krasnoyarsk -32.5
 2008.08.09 Moscow +15
 2013.04.03 Moscow -7
+2017.08.02 Medovodsk -79
+2077.08.10 NightCity +25

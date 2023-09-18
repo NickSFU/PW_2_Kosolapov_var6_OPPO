@@ -2,49 +2,12 @@
 //
 
 //#include "pch.h"
+#include "Temp_Measurement.h"
 #include <iostream>
-#include <fstream>
-#include <string>
 #include <vector>
 
 using namespace std;
 
-struct Date
-{
-    int year;
-    int month;
-    int day;
-};
-class Temp_Measurement
-{
-private:
-    Date Date;
-    string location;
-    float temperature;
-public:
-    void print_tm(ostream& ost) // Выводит в поток ost одно измерение.
-    {
-        ost << Date.year << "." << Date.month << "." << Date.day << " " << location << " ";
-        if (temperature > 0)
-            ost << "+" << temperature << endl;
-        else
-            ost << temperature << endl;
-    }
-    void read_tm(istream& ist) // Считывает из потока ist одно измерение.
-    {
-        string line;
-        getline(ist, line, '.');
-        Date.year = stoi(line);
-        getline(ist, line, '.');
-        Date.month = stoi(line);
-        getline(ist, line, ' ');
-        Date.day = stoi(line);
-        getline(ist, line, ' ');
-        location = line;
-        getline(ist, line);
-        temperature = stof(line);
-    }
-};
 
 
 vector <Temp_Measurement> Temp_Measurement_Box; // Вектор измерений
@@ -57,12 +20,13 @@ void print_measurements(vector <Temp_Measurement>& data1, ostream& ost)
     }
 }
 
-void save_measurements(vector <Temp_Measurement>& data1, istream& ist)
+void write_measurements(vector <Temp_Measurement>& data1, istream& ist)
 {
     while (!ist.eof())
     {
         Temp_Measurement buff;
         buff.read_tm(ist);
+        //buff.read_date(ist);
         data1.push_back(buff);
     }
 }
@@ -75,7 +39,7 @@ int main()
         cout << "File is not opened";
         return 1;
     }
-    save_measurements(Temp_Measurement_Box, in);
+    write_measurements(Temp_Measurement_Box, in);
     print_measurements(Temp_Measurement_Box, cout);
     return 0;
 }
