@@ -5,43 +5,49 @@
 #include "Temp_Measurement.h"
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <algorithm>
 
 using namespace std;
 
-
-
-vector <Temp_Measurement> Temp_Measurement_Box; // Вектор измерений
-
-void print_measurements(vector <Temp_Measurement>& data1, ostream& ost)
+void print_measurements(vector <TempMeasurement>& data1, ostream& ost)
 {
     for (int i = 0; i < data1.size(); i++)
     {
-        data1[i].print_tm(ost);
+        data1[i].print(ost);
     }
 }
 
-void write_measurements(vector <Temp_Measurement>& data1, istream& ist)
+void write_measurements(vector <TempMeasurement>& data1, istream& ist)
 {
     while (!ist.eof())
     {
-        Temp_Measurement buff;
-        buff.read_tm(ist);
-        //buff.read_date(ist);
+        TempMeasurement buff;
+        buff.read(ist);
         data1.push_back(buff);
     }
 }
+
 int main()
 {
-    vector <Temp_Measurement> Temp_Measurement_Box;
+    /*string line;
+    getline(cin, line);
+    find(line.begin(), line.end(), ' ');
+    find(line.rbegin(), line.rend(), ' ');
+    find_end(line.begin(), line.end(), ' ');*/
+
+
+
+    vector <TempMeasurement> temp_measurements_box;
     ifstream in("in.txt");
     if (!in.is_open())
     {
         cout << "File is not opened";
         return 1;
     }
-    write_measurements(Temp_Measurement_Box, in);
-    print_measurements(Temp_Measurement_Box, cout);
-    return 0;
+    write_measurements(temp_measurements_box, in);
+    print_measurements(temp_measurements_box, cout);
+
 }
 
 

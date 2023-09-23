@@ -2,16 +2,16 @@
 #include "Date.h"
 #include <string>
 #include <fstream>
-class Temp_Measurement
+#include <iostream>
+class TempMeasurement
 {
 private:
-    Date Date;
-    std::string location="";
-    float temperature=-100000;
+    Date date;
+    std::string location;
+    float temperature;
     void read_location(std::istream& ist);
     void read_temperature(std::istream& ist);
-    void read_date(std::istream& ist);
 public:
-    void print_tm(std::ostream& ost);
-    void read_tm(std::istream& ist);
+    void print(std::ostream& ost);
+    void read(std::istream& ist);
 };

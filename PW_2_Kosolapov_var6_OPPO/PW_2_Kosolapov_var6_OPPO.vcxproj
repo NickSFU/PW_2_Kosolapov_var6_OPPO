@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Date.cpp" />
     <ClCompile Include="PW_2_Kosolapov_var6_OPPO.cpp" />
+    <ClCompile Include="Temp_Measurement.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Date.h" />
+    <ClInclude Include="Temp_Measurement.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

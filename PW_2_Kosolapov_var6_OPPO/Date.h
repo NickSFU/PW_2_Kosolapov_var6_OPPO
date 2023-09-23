@@ -1,7 +1,13 @@
 #pragma once
-struct Date
+#include <fstream>
+#include <string>
+class Date
 {
-    int year=0;
-    int month=0;
-    int day=0;
+private:
+    int year;
+    int month;
+    int day;
+public:
+    void read_date(std::istream& ist);
+    void print_date(std::ostream& ost);
 };
