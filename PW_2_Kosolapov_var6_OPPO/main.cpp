@@ -20,7 +20,7 @@ void print_measurements(vector <TempMeasurement>& data1, ostream& ost)
 
 void write_measurements(vector <TempMeasurement>& data1, istream& ist)
 {
-    while (!ist.eof())
+    while (!ist.eof() and ist.good())
     {
         TempMeasurement buff;
         buff.read(ist);
