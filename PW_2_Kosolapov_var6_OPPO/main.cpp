@@ -30,24 +30,23 @@ void write_measurements(vector <TempMeasurement>& data1, istream& ist)
 
 int main()
 {
-    /*string line;
-    getline(cin, line);
-    find(line.begin(), line.end(), ' ');
-    find(line.rbegin(), line.rend(), ' ');
-    find_end(line.begin(), line.end(), ' ');*/
-
-
-
+    setlocale(LC_ALL, "Russian");
     vector <TempMeasurement> temp_measurements_box;
     ifstream in("in.txt");
     if (!in.is_open())
     {
-        cout << "File is not opened";
+        cout << "Файл не открыт.";
         return 1;
     }
-    write_measurements(temp_measurements_box, in);
-    print_measurements(temp_measurements_box, cout);
-
+    try 
+    {
+        write_measurements(temp_measurements_box, in);
+        print_measurements(temp_measurements_box, cout);
+    }
+    catch (runtime_error& error)
+    {
+        cout << error.what() << endl;
+    }
 }
 
 

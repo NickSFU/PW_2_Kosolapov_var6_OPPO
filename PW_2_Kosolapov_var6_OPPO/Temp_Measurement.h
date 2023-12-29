@@ -8,10 +8,16 @@ class TempMeasurement
 private:
     Date date;
     std::string location;
-    float temperature;
+    double temperature;
+    void check_location_symbols(std:: string line);
+    void check_temperature_symbols(std::string line);
+public:
     void read_location(std::istream& ist);
     void read_temperature(std::istream& ist);
-public:
     void print(std::ostream& ost);
     void read(std::istream& ist);
+    Date get_date();
+    std::string get_location();
+    double get_temperature();
+
 };
